@@ -15,35 +15,37 @@ public class ITIStringBuffer {
     public ITIStringBuffer(String firstString){
       this.buffer = new SinglyLinkedList<String>();
       buffer.addFirst(firstString);
-      cAr= new char[firstString.length()+2];
+      cAr= new char[firstString.length()];
       cnt+= firstString.length();
+      System.out.println(cnt);
       firstString.getChars(0, firstString.length(), cAr, cnt);
     }
 
     public void append(String nextString){
-      cnt += nextString.length();
-      while((nextString.length() + cnt) >= cAr.length){
-        incrementSize();
+      if((nextString.length() + cnt> cAr.length)){
+        while((nextString.length() + cnt) >= cAr.length){
+          incrementSize();
       }
+    }
+
       if(buffer.size() == 0){
         buffer.addFirst(nextString);
 
-      } else
+      } else{
         buffer.add(nextString);
+      }
 
 
       nextString.getChars(0, nextString.length(), cAr, cnt);
-      }
+      cnt += nextString.length();
+    }
 
     private void incrementSize(){
       cAr = Arrays.copyOf(cAr, cAr.length*2);
     }
 
     public String toString(){
-      // String in =  buffer.toString();
-      // char[] c = in.toCharArray();
-      // String out = new String(c, 1, c.length-2);
-      String out = new String (cAr);
+      String out = new String (cAr,0,cnt);
       return out;
     }
 
