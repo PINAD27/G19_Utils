@@ -1,23 +1,27 @@
+
+import java.util.*;
 public class ITIStringBuffer {
 
     private SinglyLinkedList<String> buffer;
-    private char[] value;
-    private int pos;
+    private char[] cAr;
+    private int cnt;
 
     public ITIStringBuffer() {
         this.buffer = new SinglyLinkedList<String>();
-        count = 0;
-        value = new char[32];
+        cnt = 0;
+        cAr = new char[32];
     }
 
     public ITIStringBuffer(String  firstString){
       this.buffer = new SinglyLinkedList<String>();
       buffer.addFirst(firstString);
-      count = 1;
+      cAr= new char[firstString.length()+2];
+      cnt+= firstString.length();
+      firstString.getChars(0, firstString.length(), cAr, cnt);
     }
 
     public void append(String nextString){
-      if((nextString.length + pos) > value.length){
+      if((nextString.length() + cnt) > cAr.length){
         incrementSize();
       }
       if(buffer.size() == 0){
@@ -26,17 +30,19 @@ public class ITIStringBuffer {
       } else
         buffer.add(nextString);
 
-      count++;
-    }
+      cnt+= nextString.length();
+      nextString.getChars(0, nextString.length(), cAr, cnt);   
+       }
 
     private void incrementSize(){
-      value = Arrays.copyOf(value, value.length+32);
+      cAr = Arrays.copyOf(cAr, cAr.length+32);
     }
 
     public String toString(){
-      String in =  buffer.toString();
-      char[] c = in.toCharArray();
-      String out = new String(c, 1, c.length-2);
+      // String in =  buffer.toString();
+      // char[] c = in.toCharArray();
+      // String out = new String(c, 1, c.length-2);
+      String out = new String (cAr);
       return out;
     }
 
