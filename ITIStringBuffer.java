@@ -21,7 +21,7 @@ public class ITIStringBuffer {
     }
 
     public void append(String nextString){
-      if((nextString.length() + cnt) > cAr.length){
+      if((nextString.length() + cnt> cAr.length)){
         incrementSize();
       }
       if(buffer.size() == 0){
