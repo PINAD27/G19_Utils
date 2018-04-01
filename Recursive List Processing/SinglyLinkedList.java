@@ -2,7 +2,35 @@ import java.util.*;
 
 public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
 
-//  implementation is at bottom of page
+      private int count(Node<E> fromNode, E toElement){
+        if(fromNode.value==toElement){
+          return 1;
+        }
+        if(fromNode.next == null){
+          return 1;
+        }
+        else{
+          return 1+count(fromNode.next, toElement);
+        }
+      }
+
+      public int count(E fromElement, E toElement){
+        Node<E> fromNode = new Node<E>(head.value, head.next);
+        boolean found = false;
+        while(fromNode!=null){
+          if(fromNode.value == fromElement){
+            found = true;
+            break;
+          } else{
+            fromNode = fromNode.next;
+          }
+        }
+        if(!found){
+          return 0;
+        }
+        return count(fromNode, toElement);
+      }
+
 
     private static class Node<T> {
         private T value;
@@ -253,35 +281,6 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
         return true;
     }
 
-    private int count(Node<E> fromNode, E toElement){
-      if(fromNode.value==toElement){
-        return 1;
-      }
-      if(fromNode.next == null){
-        return 1;
-      }
-      else{
-        return 1+count(fromNode.next, toElement);
-      }
-
-    }
-
-    public int count(E fromElement, E toElement){
-      Node<E> fromNode = new Node<E>(head.value, head.next);
-      boolean found = false;
-      while(fromNode!=null){
-        if(fromNode.value == fromElement){
-          found = true;
-          break;
-        } else{
-          fromNode = fromNode.next;
-        }
-      }
-      if(!found){
-        return 0;
-      }
-      return count(fromNode, toElement);
-    }
 
 
     public String toString(){
