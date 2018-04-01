@@ -61,6 +61,9 @@ public class LinkedList<E> implements List<E> {
     }
 
     public Iterator<E> iterator(Iterator<E> other){
+      if(other == null){
+        throw new NullPointerException("null element passed");
+      }
       int index = other.nextIndex();
       return iterator(index);
     }
