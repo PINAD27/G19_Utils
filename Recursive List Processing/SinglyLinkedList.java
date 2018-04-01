@@ -2,9 +2,7 @@ import java.util.*;
 
 public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
 
-    public int count(E fromElement, E toElement) {
-        throw new UnsupportedOperationException("replace with your implementation");
-    }
+//  implementation is at bottom of page
 
     private static class Node<T> {
         private T value;
@@ -255,43 +253,36 @@ public class SinglyLinkedList<E> implements List<E>, Iterable<E> {
         return true;
     }
 
-    private int count(E fromElement, E toElement){
-      if(fromElement==toElement){
-        return 0;
+    private int count(Node<E> fromNode, E toElement){
+      if(fromNode.value==toElement){
+        return 1;
+      }
+      if(fromNode.next == null){
+        return 1;
       }
       else{
-
+        return 1+count(fromNode.next, toElement);
       }
 
     }
 
     public int count(E fromElement, E toElement){
-      if(!contains(fromElement)){
-        return 0;
-      } else {
-      return count(fromElement, toElement);
-    }
-    
-    }
-
-    public boolean contains(E o){
-      if(o == null){
-        throw new NullPointerException("null");
+      Node<E> fromNode = new Node<E>(head.value, head.next);
+      boolean found = false;
+      while(fromNode!=null){
+        if(fromNode.value == fromElement){
+          found = true;
+          break;
+        } else{
+          fromNode = fromNode.next;
         }
-        return contains(o, head);
+      }
+      if(!found){
+        return 0;
+      }
+      return count(fromNode, toElement);
     }
 
-    private boolean contains(E o, Node<E> p){
-      if(p == null){
-        return false;
-      }
-      if(p.value == o){
-        return true;
-      }
-      else{
-        return contains(o, p.next);
-      }
-    }
 
     public String toString(){
         StringBuffer res = new StringBuffer();
