@@ -42,7 +42,6 @@ public class Q1 {
 
         testStringBuffer();
         testStringAppend();
-        System.out.println(resultConcat);
         if(!resultBuffer.equals(resultConcat)) {
             System.out.println("Error, the strings are not the same");
             return;
