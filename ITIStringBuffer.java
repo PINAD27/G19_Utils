@@ -12,7 +12,7 @@ public class ITIStringBuffer {
         cAr = new char[32];
     }
 
-    public ITIStringBuffer(String  firstString){
+    public ITIStringBuffer(String firstString){
       this.buffer = new SinglyLinkedList<String>();
       buffer.addFirst(firstString);
       cAr= new char[firstString.length()+2];
@@ -21,21 +21,22 @@ public class ITIStringBuffer {
     }
 
     public void append(String nextString){
-      if((nextString.length() + cnt) > cAr.length){
+      cnt += nextString.length();
+      while((nextString.length() + cnt) >= cAr.length){
         incrementSize();
       }
       if(buffer.size() == 0){
         buffer.addFirst(nextString);
-        
+
       } else
         buffer.add(nextString);
 
-      cnt+= nextString.length();
-      nextString.getChars(0, nextString.length(), cAr, cnt);   
-       }
+
+      nextString.getChars(0, nextString.length(), cAr, cnt);
+      }
 
     private void incrementSize(){
-      cAr = Arrays.copyOf(cAr, cAr.length+32);
+      cAr = Arrays.copyOf(cAr, cAr.length*2);
     }
 
     public String toString(){
